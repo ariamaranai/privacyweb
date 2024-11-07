@@ -1,0 +1,1 @@
+{"manifest_version":3,"name":"privacyweb","version":"0","description":"Disables any features that impede privacy.Only Third Party Cookies and referers can be enabled by action","icons":{"128":"on.png"},"permissions":["privacy"],"background":{"service_worker":"s.js"},"action":{}}
