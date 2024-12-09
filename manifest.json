@@ -1,1 +1,16 @@
-{"manifest_version":3,"name":"privacyweb","version":"0","description":"Disable tracking APIs,Third Party Cookie,referrer","icons":{"128":"on.png"},"permissions":["privacy"],"background":{"service_worker":"s.js"},"action":{}}
+{
+  "manifest_version": 3,
+  "name": "privacyweb",
+  "version": "0",
+  "description": "Disable tracking APIs,Third Party Cookie,referrer",
+  "icons": {
+    "128": "on.png"
+  },
+  "permissions": [
+    "privacy"
+  ],
+  "background": {
+    "service_worker": "bg.js"
+  },
+  "action": {}
+}
