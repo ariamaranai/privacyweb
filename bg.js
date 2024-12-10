@@ -9,8 +9,8 @@ chrome.action.onClicked.addListener(async ()=> chrome.action.setIcon({
   path: (await chrome.privacy.websites.referrersEnabled.get({})).value ?
     (chrome.privacy.websites.referrersEnabled.set({value: !1}),
      chrome.privacy.websites.thirdPartyCookiesAllowed.set({value: !1}),
-     "off.png") :
+     "on.png") :
     (chrome.privacy.websites.referrersEnabled.set({value: !0}),
      chrome.privacy.websites.thirdPartyCookiesAllowed.set({value: !0}),
-     "on.png")
+     "off.png")
 }))
