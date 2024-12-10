@@ -6,11 +6,11 @@ chrome.privacy.websites.topicsEnabled.set({value: !1}),
 chrome.privacy.websites.referrersEnabled.set({value: !1}),
 chrome.privacy.websites.thirdPartyCookiesAllowed.set({value: !1}),
 chrome.action.onClicked.addListener(async ()=> chrome.action.setIcon({
-  path: (await c.privacy.websites.referrersEnabled.get({})).value ?
-    (c.privacy.websites.referrersEnabled.set({value: !1}),
-     c.privacy.websites.thirdPartyCookiesAllowed.set({value: !1}),
+  path: (await chrome.privacy.websites.referrersEnabled.get({})).value ?
+    (chrome.privacy.websites.referrersEnabled.set({value: !1}),
+     chrome.privacy.websites.thirdPartyCookiesAllowed.set({value: !1}),
      "off.png") :
-    (c.privacy.websites.referrersEnabled.set({value: !0}),
-     c.privacy.websites.thirdPartyCookiesAllowed.set({value: !0}),
+    (chrome.privacy.websites.referrersEnabled.set({value: !0}),
+     chrome.privacy.websites.thirdPartyCookiesAllowed.set({value: !0}),
      "on.png")
 }))
