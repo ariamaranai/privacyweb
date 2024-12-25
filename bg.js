@@ -21,3 +21,8 @@ chrome.action.onClicked.addListener(async () =>
          "off.png")
   })
 );
+chrome.management.onEnabled.addListener(async info =>
+  info.id == chrome.runtime.id &&
+  (await chrome.privacy.websites.referrersEnabled.get({})).value &&
+  chrome.action.setIcon({ path: "off.png" })
+);
