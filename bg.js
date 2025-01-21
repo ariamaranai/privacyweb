@@ -13,9 +13,9 @@ chrome.action.onClicked.addListener(() =>
   chrome.privacy.websites.referrersEnabled.get({}, async details  => {
     let value = !details.value;
     let arg = { value };
-    await chrome.privacy.websites.referrersEnabled.set(arg);
-    await chrome.privacy.websites.thirdPartyCookiesAllowed.set(arg);
-    await chrome.action.setIcon({ path: value ? "off.png" : "on.png" });
+    chrome.privacy.websites.referrersEnabled.set(arg);
+    chrome.privacy.websites.thirdPartyCookiesAllowed.set(arg);
+    chrome.action.setIcon({ path: value ? "off.png" : "on.png" });
   })
 );
 chrome.management.onEnabled.addListener(info =>
