@@ -6,19 +6,11 @@ for (let i = 0; i < 7; ++i)
     "relatedWebsiteSetsEnabled",
     "topicsEnabled",
     "referrersEnabled",
-    "thirdPartyCookiesAllowed",
+    "thirdPartyCookiesAllowed"
   ][i]].set({ value: !1 });
-{
-  let isEnable = 1;
-  chrome.action.onClicked.addListener(() => (
-    chrome.privacy.websites.referrersEnabled.set({
-      value: (isEnable = !isEnable)
-    }),
-    chrome.privacy.websites.thirdPartyCookiesAllowed.set({
-      value: isEnable
-    }),
-    chrome.action.setIcon({
-      path: isEnable ? "off.png" : "on.png"
-    })
-  ))
-}
+chrome.action.onClicked.addListener(async () => {
+  let value = !(await chrome.privacy.websites.referrersEnabled.get({})).value;
+  chrome.privacy.websites.referrersEnabled.set({ value }),
+  chrome.privacy.websites.thirdPartyCookiesAllowed.set({ value }),
+  chrome.action.setIcon({ path: value ? "off.png" : "on.png" })
+});
