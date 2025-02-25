@@ -1,5 +1,6 @@
 chrome.runtime.onInstalled.addListener(() => {
-  for (let i = 0; i < 7; ++i)
+  let i = 7;
+  while (
     chrome.privacy.websites[[
       "adMeasurementEnabled",
       "fledgeEnabled",
@@ -8,8 +9,9 @@ chrome.runtime.onInstalled.addListener(() => {
       "topicsEnabled",
       "referrersEnabled",
       "thirdPartyCookiesAllowed"
-    ][i]].set({ value: !1 });
-    chrome.action.setIcon({ path: "on.png" });
+    ][--i]].set({ value: !1 }),
+    i
+  );
 });
 chrome.privacy.websites.referrersEnabled.get({}, details =>
   chrome.action.setIcon({ path: details.value ? "off.png" : "on.png" })
