@@ -13,12 +13,14 @@ chrome.runtime.onInstalled.addListener(() => {
     i
   );
 });
-chrome.privacy.websites.referrersEnabled.get({}, details =>
-  chrome.action.setIcon({ path: details.value ? "off.png" : "on.png" })
-);
+(async () =>
+  chrome.action.setIcon({ path:
+    (await chrome.privacy.websites.referrersEnabled.get({})).value ? "off.png" : "on.png"
+  })
+)();
 chrome.action.onClicked.addListener(async () => {
   let value = !(await chrome.privacy.websites.referrersEnabled.get({})).value;
-  chrome.action.setIcon({ path: value ? "off.png" : "on.png" });
-  chrome.privacy.websites.referrersEnabled.set(value = { value });
-  chrome.privacy.websites.thirdPartyCookiesAllowed.set(value);
+  await chrome.action.setIcon({ path: value ? "off.png" : "on.png" });
+  await chrome.privacy.websites.referrersEnabled.set(value = { value });
+  await chrome.privacy.websites.thirdPartyCookiesAllowed.set(value);
 });
