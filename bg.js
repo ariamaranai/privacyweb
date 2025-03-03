@@ -13,10 +13,8 @@ chrome.runtime.onInstalled.addListener(() => {
     i
   );
 });
-chrome.runtime.onStartup.addListener(() => 
-  chrome.privacy.websites.referrersEnabled.get({}, details =>
-    chrome.action.setIcon({ path: details.value ? "off.png" : "on.png" })
-  )
+chrome.privacy.websites.referrersEnabled.get({}, details =>
+  chrome.action.setIcon({ path: details.value ? "off.png" : "on.png" })
 );
 chrome.action.onClicked.addListener(async () => {
   let value = !(await chrome.privacy.websites.referrersEnabled.get({})).value;
