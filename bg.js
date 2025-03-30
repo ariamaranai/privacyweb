@@ -1,8 +1,9 @@
 chrome.runtime.onInstalled.addListener(() => {
-  let i = 7;
+  let i = 8;
   while (
     chrome.privacy.websites[[
       "adMeasurementEnabled",
+      "doNotTrackEnabled",
       "fledgeEnabled",
       "hyperlinkAuditingEnabled",
       "relatedWebsiteSetsEnabled",
