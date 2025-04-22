@@ -1,5 +1,5 @@
 chrome.runtime.onInstalled.addListener(() => {
-  let i = 8;
+  let i = 0;
   while (
     chrome.privacy.websites[[
       "adMeasurementEnabled",
@@ -10,8 +10,8 @@ chrome.runtime.onInstalled.addListener(() => {
       "topicsEnabled",
       "referrersEnabled",
       "thirdPartyCookiesAllowed"
-    ][--i]].set({ value: !1 }),
-    i
+    ][i]].set({ value: !1 }),
+    ++i < 8
   );
 });
 chrome.action.onClicked.addListener(async () => {
