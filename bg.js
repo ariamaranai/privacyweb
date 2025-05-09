@@ -22,9 +22,11 @@ chrome.action.onClicked.addListener(async () => {
   chrome.privacy.websites.referrersEnabled.set(value = { value });
   chrome.privacy.websites.thirdPartyCookiesAllowed.set(value);
 });
-chrome.runtime.onStartup.addListener(async () =>
-  chrome.action.setIcon({
+{
+  let f = async () => chrome.action.setIcon({
     path: (await chrome.privacy.websites.referrersEnabled.get({})).value ? "off.png" : "on.png"
-  })
-);
-chrome.runtime.onStartup.dispatch();
+  });
+  chrome.runtime.onSuspend.addListener(() => chrome.runtime.onStartup.removeListener(f));
+  chrome.runtime.onStartup.addListener(f);
+  f();
+}
