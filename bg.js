@@ -23,10 +23,11 @@ chrome.action.onClicked.addListener(async () => {
   chrome.privacy.websites.thirdPartyCookiesAllowed.set(value);
 });
 {
-  let f = async () => chrome.action.setIcon({
-    path: (await chrome.privacy.websites.referrersEnabled.get({})).value ? "off.png" : "on.png"
-  });
-  chrome.runtime.onSuspend.addListener(() => chrome.runtime.onStartup.removeListener(f));
-  chrome.runtime.onStartup.addListener(f);
-  f();
+  let hasStarted;
+  chrome.runtime.onStartup.addListener(async () =>
+    hasStarted ??= chrome.action.setIcon({
+      path: (await chrome.privacy.websites.referrersEnabled.get({})).value ? "off.png" : "on.png"
+    })
+  );
+  chrome.runtime.onStartup.dispatch();
 }
