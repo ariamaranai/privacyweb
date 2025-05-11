@@ -29,5 +29,5 @@ chrome.action.onClicked.addListener(async () => {
       path: (await chrome.privacy.websites.referrersEnabled.get({})).value ? "off.png" : "on.png"
     })
   );
-  chrome.runtime.onStartup.dispatch();
 }
+chrome.runtime.onStartup.dispatch();
