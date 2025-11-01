@@ -1,5 +1,5 @@
 chrome.runtime.onInstalled.addListener(() => {
-  let i = 0;
+  let i = 8;
   while (
     chrome.privacy.websites[[
       "adMeasurementEnabled",
@@ -10,24 +10,20 @@ chrome.runtime.onInstalled.addListener(() => {
       "topicsEnabled",
       "referrersEnabled",
       "thirdPartyCookiesAllowed"
-    ][i]].set({ value: !1 }),
-    i < 7
-  ) ++i;
+    ][--i]].set({ value: !1 }),
+    i
+  );
 });
 chrome.action.onClicked.addListener(async () => {
   let value = !(await chrome.privacy.websites.referrersEnabled.get({})).value;
-  chrome.action.setIcon({
-    path: value ? "off.png" : "on.png"
-  });
+  chrome.action.setIcon({ path: value ? "off.png" : "on.png" });
   chrome.privacy.websites.referrersEnabled.set(value = { value });
   chrome.privacy.websites.thirdPartyCookiesAllowed.set(value);
 });
 {
   let isCalled;
   chrome.runtime.onStartup.addListener(async () =>
-    isCalled ??= chrome.action.setIcon({
-      path: (await chrome.privacy.websites.referrersEnabled.get({})).value ? "off.png" : "on.png"
-    })
+    isCalled ??= chrome.action.setIcon({ path: (await chrome.privacy.websites.referrersEnabled.get({})).value ? "off.png" : "on.png" })
   );
 }
 chrome.runtime.onStartup.dispatch();
