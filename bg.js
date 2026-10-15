@@ -1,7 +1,8 @@
 {
-  let { action, privacy, runtime } = chrome;
+  let { action, privacy, runtime, storage } = chrome;
   let { websites } = privacy;
   let isCalled;
+  storage = storage.local;
   runtime.onInstalled.addListener(() => {
     let i = 8;
     while (
@@ -14,22 +15,22 @@
         "topicsEnabled",
         "referrersEnabled",
         "thirdPartyCookiesAllowed"
-      ][--i]].set({ value: !1 }),
+      ][--i]]?.set({ value: !1 }),
       i
     );
+    storage.set({ 0: 0 })
   });
   action.onClicked.addListener(() =>
-    websites.referrersEnabled.get({}, e => (
-      action.setIcon({ path: (e = !e.value) ? "off.png" : "on.png" }),
-      websites.referrersEnabled.set(e = { value: e }),
-      websites.thirdPartyCookiesAllowed.set(e)
+    storage.get("0", v => (
+      action.setIcon({ path: (v = !v[0]) ? "off.png" : "on.png" }),
+      websites.referrersEnabled.set({ value: v }),
+      websites.thirdPartyCookiesAllowed.set({ value: v }),
+      storage.set({ 0: v })
     ))
   );
   runtime.onStartup.addListener(() => (
     isCalled ??= (
-      websites.referrersEnabled.get({}, e =>
-        action.setIcon({ path: e.value ? "off.png" : "on.png" })
-      ),
+      storage.get("0", v => action.setIcon({ path: v[0] ? "off.png" : "on.png" })),
       0
     )
   ));
